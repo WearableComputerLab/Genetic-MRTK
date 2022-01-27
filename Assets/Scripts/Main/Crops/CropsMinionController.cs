@@ -33,7 +33,7 @@ public class CropsMinionController : MonoBehaviour
 	[SerializeField] Text topCenterText;
 	[SerializeField] Text numMinionsText;
 	[SerializeField] Text maxMinionsText;
-	[SerializeField] Text minionLimitText;
+	//[SerializeField] Text minionLimitText;
 
 	public Action<int> AddResource;
 	public Func<bool> CanBuyMinion;
@@ -72,8 +72,8 @@ public class CropsMinionController : MonoBehaviour
 		}
 #endif
 		minions = new List<Minion>(MaxNumMinions);
-		//maxMinionsText.text = MaxNumMinions + " max";
-		//topCenterText.text = "";
+		maxMinionsText.text = MaxNumMinions + " max";
+		topCenterText.text = "";
 
 		int numMinions = Mathf.Min(startingNumMinions, MaxNumMinions);
 		AddMinions(numMinions);
@@ -86,12 +86,12 @@ public class CropsMinionController : MonoBehaviour
 
 		NumMinionsToAdd = 0;
 
-		limitTextAnimation = minionLimitText.DOFade(0, 0.3f)
-			.From()
-			.OnComplete(() => delaySequence.Restart())
-			.SetEase(Ease.Linear)
-			.SetAutoKill(false)
-			.Pause();
+		//limitTextAnimation = minionLimitText.DOFade(0, 0.3f)
+		//	.From()
+		//	.OnComplete(() => delaySequence.Restart())
+		//	.SetEase(Ease.Linear)
+		//	.SetAutoKill(false)
+		//	.Pause();
 
 		delaySequence = DOTween.Sequence()
 			.AppendInterval(3)
@@ -123,7 +123,7 @@ public class CropsMinionController : MonoBehaviour
 			//TODO: THIS CODE SUCKS!! REWRITE THIS CRAP!
 			float totalEvolutionTime = maxEvolutionTime;
 			float time = Time.time - evolutionStartTime;
-			// topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
+			topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
 
 			float actualEvolTime = totalEvolutionTime - evolutionStartAndEndDelay * 2;
 			float waitTime = actualEvolTime / minions.Count;

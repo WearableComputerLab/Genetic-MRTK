@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 	[Header("Game References")]
 	[SerializeField] UpgradesManager UpgradesManager;
 	[SerializeField] GameAreaUnlocker GameAreaUnlocker;
-	[SerializeField] SimpleCameraFit simpleCameraFit;
+	//[SerializeField] SimpleCameraFit simpleCameraFit;
 	[SerializeField] Transform[] gameAreas;
 
 	[Header("UI References")]
@@ -78,16 +78,16 @@ public class GameController : MonoBehaviour
 
 		moveToAreaTweens = new Tweener[gameAreas.Length];
 
-		for (int i = 0; i < moveToAreaTweens.Length; i++)
-		{
-			Vector3 pos = gameAreas[i].localPosition;
-			pos.z = simpleCameraFit.transform.localPosition.z;
+		//for (int i = 0; i < moveToAreaTweens.Length; i++)
+		//{
+		//	Vector3 pos = gameAreas[i].localPosition;
+		//	pos.z = simpleCameraFit.transform.localPosition.z;
 
-			moveToAreaTweens[i] = simpleCameraFit.transform.DOLocalMove(pos, 1)
-				.SetEase(Ease.OutExpo)
-				.SetAutoKill(false)
-				.Pause();
-		}
+		//	moveToAreaTweens[i] = simpleCameraFit.transform.DOLocalMove(pos, 1)
+		//		.SetEase(Ease.OutExpo)
+		//		.SetAutoKill(false)
+		//		.Pause();
+		//}
 
 		OnGameAreaChangeButtonClick(0);
 		moveToAreaTweens[0].Complete();
@@ -193,15 +193,15 @@ public class GameController : MonoBehaviour
 
 	private void UpdateResourceVisuals(Resource resource)
 	{
-		int index = (int)resource;
+		//int index = (int)resource;
 
-		if (resourceStorages[index] > 0) {
-			resourceTexts[index].text = resources[index] + "/" + resourceStorages[index];
-		} else {
-			resourceTexts[index].text = resources[index].ToString();
-		}
+		//if (resourceStorages[index] > 0) {
+		//	resourceTexts[index].text = resources[index] + "/" + resourceStorages[index];
+		//} else {
+		//	resourceTexts[index].text = resources[index].ToString();
+		//}
 
-		if (ValueChangedEvent != null) ValueChangedEvent(resource);
+		//if (ValueChangedEvent != null) ValueChangedEvent(resource);
 	}
 
 	#endregion
@@ -218,16 +218,16 @@ public class GameController : MonoBehaviour
 
 	public void OnGameAreaChangeButtonClick(int index)
 	{
-		if (moveToAreaTweens[index].IsPlaying()) return;
+		//if (moveToAreaTweens[index].IsPlaying()) return;
 
-		StopTweens();
-		moveToAreaTweens[index].ChangeStartValue(simpleCameraFit.transform.localPosition);
-		moveToAreaTweens[index].Play();
+		//StopTweens();
+		//moveToAreaTweens[index].ChangeStartValue(simpleCameraFit.transform.localPosition);
+		//moveToAreaTweens[index].Play();
 
-		for (int i = 0; i < gameAreaCanvases.Length; i++)
-		{
-			gameAreaCanvases[i].gameObject.SetActive(i == index);
-		}
+		//for (int i = 0; i < gameAreaCanvases.Length; i++)
+		//{
+		//	gameAreaCanvases[i].gameObject.SetActive(i == index);
+		//}
 	}
 
 	public void OnUpgradesButtonClick()
