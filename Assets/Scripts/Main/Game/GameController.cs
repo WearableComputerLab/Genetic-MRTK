@@ -49,11 +49,11 @@ public class GameController : MonoBehaviour
 		UpgradesManager.CanBuyUpgrade = CanBuy;
 		UpgradesManager.UpgradeUnlockedEvent += CheckUpgrades;
 
-		cornController = gameAreas[(int)Resource.Corn].GetComponent<CropsMinionController>();
-		cornController.AddResource = val => SetResource(Resource.Corn, GetResource(Resource.Corn) + val);
-		cornController.CanBuyMinion = CanBuyMinion;
-		cornController.BuyMinion = BuyMinion;
-		cornController.SellMinion = SellMinion;
+		//cornController = gameAreas[(int)Resource.Corn].GetComponent<CropsMinionController>();
+		//cornController.AddResource = val => SetResource(Resource.Corn, GetResource(Resource.Corn) + val);
+		//cornController.CanBuyMinion = CanBuyMinion;
+		//cornController.BuyMinion = BuyMinion;
+		//cornController.SellMinion = SellMinion;
 
 		wheatController = gameAreas[0].GetComponent<CropsMinionController>();
 		wheatController.AddResource = val => SetResource(Resource.Wheat, GetResource(Resource.Wheat) + val);
@@ -89,21 +89,21 @@ public class GameController : MonoBehaviour
 		//		.Pause();
 		//}
 
-		OnGameAreaChangeButtonClick(0);
-		moveToAreaTweens[0].Complete();
+		//OnGameAreaChangeButtonClick(0);
+		//moveToAreaTweens[0].Complete();
 
-		noMoneyTextAnimation = notEnoughMoneyText.DOFade(0, 0.3f)
-			.From()
-			.OnComplete(() => delaySequence.Restart())
-			.SetEase(Ease.Linear)
-			.SetAutoKill(false)
-			.Pause();
+		//noMoneyTextAnimation = notEnoughMoneyText.DOFade(0, 0.3f)
+		//	.From()
+		//	.OnComplete(() => delaySequence.Restart())
+		//	.SetEase(Ease.Linear)
+		//	.SetAutoKill(false)
+		//	.Pause();
 
-		delaySequence = DOTween.Sequence()
-			.AppendInterval(3)
-			.AppendCallback(() => noMoneyTextAnimation.PlayBackwards())
-			.SetAutoKill(false)
-			.Pause();
+		//delaySequence = DOTween.Sequence()
+		//	.AppendInterval(3)
+		//	.AppendCallback(() => noMoneyTextAnimation.PlayBackwards())
+		//	.SetAutoKill(false)
+		//	.Pause();
 	}
 
 	void OnValidate()

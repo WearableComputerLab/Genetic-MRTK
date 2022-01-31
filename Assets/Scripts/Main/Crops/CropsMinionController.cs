@@ -17,7 +17,7 @@ public class CropsMinionController : MonoBehaviour
 	[Header("Minions")]
 	[SerializeField] int startingNumMinions;
 	[SerializeField] float generationLifeTime;
-	[SerializeField] float minionMovementSpeed = 1;
+	[SerializeField] float minionMovementSpeed = 0.1f;
 	[SerializeField] float minionActionSpeed = 1;
 	[SerializeField] float minionRotationSpeed = 1;
 	[SerializeField] MinionPool minionPool;
@@ -221,12 +221,12 @@ public class CropsMinionController : MonoBehaviour
 
 	private void SetMinionsText()
 	{
-		sb.Length = 0;
-		sb.Append(numMinions);
-		sb.Append(" (+");
-		sb.Append(NumMinionsToAdd);
-		sb.Append(")");
-		numMinionsText.text = sb.ToString();
+		//sb.Length = 0;
+		//sb.Append(numMinions);
+		//sb.Append(" (+");
+		//sb.Append(NumMinionsToAdd);
+		//sb.Append(")");
+		//numMinionsText.text = sb.ToString();
 	}
 
 	#region Button Functions
