@@ -120,30 +120,33 @@ public class CropsMinionController : MonoBehaviour
 		}
 		else if (evolutionStartTime >= 0)
 		{
-			//TODO: THIS CODE SUCKS!! REWRITE THIS CRAP!
-			float totalEvolutionTime = maxEvolutionTime;
-			float time = Time.time - evolutionStartTime;
-			topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
+            //TODO: THIS CODE SUCKS!! REWRITE THIS CRAP!
+            //float totalEvolutionTime = maxEvolutionTime;
+            //float time = Time.time - evolutionStartTime;
+            //topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
 
-			float actualEvolTime = totalEvolutionTime - evolutionStartAndEndDelay * 2;
-			float waitTime = actualEvolTime / minions.Count;
-			float aux = Mathf.Clamp(time - evolutionStartAndEndDelay, -evolutionStartAndEndDelay, actualEvolTime) / actualEvolTime * (minions.Count - 1);
-			int index = Mathf.FloorToInt(aux);
+            //float actualEvolTime = totalEvolutionTime - evolutionStartAndEndDelay * 2;
+            //float waitTime = actualEvolTime / minions.Count;
+            //float aux = Mathf.Clamp(time - evolutionStartAndEndDelay, -evolutionStartAndEndDelay, actualEvolTime) / actualEvolTime * (minions.Count - 1);
+            //int index = Mathf.FloorToInt(aux);
+            //print("Hello");
+            //while (minionEvolveIndex <= index)
+            //{
+            //    minions[minionEvolveIndex].Reset(ga.Population[minionEvolveIndex].Genes, minionMovementSpeed, minionActionSpeed, minionRotationSpeed, waitTime);
+            //    minionEvolveIndex++;
+            //    print("Evolve");
+            //}
 
-			while (minionEvolveIndex <= index) {
-				minions[minionEvolveIndex].Reset(ga.Population[minionEvolveIndex].Genes, minionMovementSpeed, minionActionSpeed, minionRotationSpeed, waitTime);
-				minionEvolveIndex++;
-			}
-
-			if (time >= totalEvolutionTime)
-			{
-				evolutionStartTime = -1;
-				lastGenerationTime = Time.time;
-				topCenterText.text = "";
-			}
-		}
+            //if (time >= totalEvolutionTime)
+            //{
+            //    evolutionStartTime = -1;
+            //    lastGenerationTime = Time.time;
+            //    topCenterText.text = "";
+            //}
+        }
 		else
 		{
+			print("Else");
 			float time = Time.time - lastGenerationTime;
 			if (generationLifeTime > 0) {
 				topCenterText.text = "Ends in: " + (generationLifeTime - time).ToString("F1");
@@ -175,7 +178,33 @@ public class CropsMinionController : MonoBehaviour
 		}
 	}
 
-	private float GetRandomFloat(System.Random r)
+    public void Evolve()
+    {
+		float totalEvolutionTime = maxEvolutionTime;
+		float time = Time.time - evolutionStartTime;
+		topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
+
+		float actualEvolTime = totalEvolutionTime - evolutionStartAndEndDelay * 2;
+		float waitTime = actualEvolTime / minions.Count;
+		float aux = Mathf.Clamp(time - evolutionStartAndEndDelay, -evolutionStartAndEndDelay, actualEvolTime) / actualEvolTime * (minions.Count - 1);
+		int index = Mathf.FloorToInt(aux);
+		print("Hello");
+		while (minionEvolveIndex <= index)
+		{
+			minions[minionEvolveIndex].Reset(ga.Population[minionEvolveIndex].Genes, minionMovementSpeed, minionActionSpeed, minionRotationSpeed, waitTime);
+			minionEvolveIndex++;
+			print("Evolve");
+		}
+
+		if (time >= totalEvolutionTime)
+		{
+			evolutionStartTime = -1;
+			lastGenerationTime = Time.time;
+			topCenterText.text = "";
+		}
+	}
+
+    private float GetRandomFloat(System.Random r)
 	{
 		return (float)r.NextDouble();
 	}

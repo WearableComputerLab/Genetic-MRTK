@@ -14,6 +14,10 @@ public class FarmAreaInteractable : MonoBehaviour, IMixedRealityPointerHandler
     {
         isSelected = !isSelected;
         print("Clicked");
+
+        var groundObject = transform.Find("Ground");
+        groundObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
         print(isSelected);
     }
 
