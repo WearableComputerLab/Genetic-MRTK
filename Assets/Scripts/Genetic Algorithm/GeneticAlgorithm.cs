@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Random = System.Random;
 
 public class GeneticAlgorithm<T>
 {
+	Transform farm;
 	public List<DNA<T>> Population { get; private set; }
 	public T[] BestGenes { get; private set; }
 	public float BestFitness { get; private set; }
@@ -20,7 +23,7 @@ public class GeneticAlgorithm<T>
 	private float fitnessSum;
 	private List<DNA<T>> auxPopulation;
 
-	public GeneticAlgorithm(int populationSize, int dnaSize, Random random, Func<Random, T> getRandomGene, Func<int, float> fitnessFunction, 
+	public GeneticAlgorithm(Transform farm, int populationSize, int dnaSize, Random random, Func<Random, T> getRandomGene, Func<int, float> fitnessFunction, 
 		float mutationRate = 0.01f, int elitism = 5, CrossoverMethod crossoverMethod = CrossoverMethod.Uniform, T[] preLoad = null)
 	{
 		this.random = random;
@@ -32,6 +35,7 @@ public class GeneticAlgorithm<T>
 		Population = new List<DNA<T>>();
 		auxPopulation = new List<DNA<T>>();
 
+		this.farm = farm;
 		this.dnaSize = dnaSize;
 		this.getRandomGene = getRandomGene;
 		this.fitnessFunction = fitnessFunction;
@@ -98,9 +102,18 @@ public class GeneticAlgorithm<T>
 		int indexOfBest = 0;
 		fitnessSum = 0;
 
+		
+
 		for (int i = 0; i < Population.Count; i++)
 		{
+			FarmArea farmArea = farm.GetComponentsInChildren<FarmArea>()[i];
+			
 			Population[i].CalculateFitness(i);
+			if (farmArea.GetComponent<FarmAreaInteractable>().IsSelected())
+            {
+				Population[i].OverrideFitness();
+				Debug.Log("Add 20 to Fitness");
+            }
 			if (Population[i].Fitness > Population[indexOfBest].Fitness) {
 				indexOfBest = i;
 			}

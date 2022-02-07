@@ -45,6 +45,12 @@ public class DNA<T>
 		return Fitness;
 	}
 
+	public float OverrideFitness()
+    {
+		Fitness += 20;
+		return Fitness;
+    }
+
 	public DNA<T> Crossover(DNA<T> otherParent, CrossoverMethod crossoverMethod)
 	{
 		var child = new DNA<T>(Genes.Length, random, getRandomGene, fitnessFunction, initGenes: false);
