@@ -77,7 +77,7 @@ public class CropsMinionController : MonoBehaviour
 
 		int numMinions = Mathf.Min(startingNumMinions, MaxNumMinions);
 		AddMinions(numMinions);
-		ga = new GeneticAlgorithm<float>(numMinions, 2, Rand.Random, GetRandomFloat, FitnessFunction,
+		ga = new GeneticAlgorithm<float>(farm, numMinions, 2, Rand.Random, GetRandomFloat, FitnessFunction,
 			mutationRate: MutationRate, elitism: Elitism, crossoverMethod: CrossoverMethod);
 
 		ResetFarm();
@@ -129,7 +129,6 @@ public class CropsMinionController : MonoBehaviour
             //float waitTime = actualEvolTime / minions.Count;
             //float aux = Mathf.Clamp(time - evolutionStartAndEndDelay, -evolutionStartAndEndDelay, actualEvolTime) / actualEvolTime * (minions.Count - 1);
             //int index = Mathf.FloorToInt(aux);
-            //print("Hello");
             //while (minionEvolveIndex <= index)
             //{
             //    minions[minionEvolveIndex].Reset(ga.Population[minionEvolveIndex].Genes, minionMovementSpeed, minionActionSpeed, minionRotationSpeed, waitTime);
@@ -146,7 +145,6 @@ public class CropsMinionController : MonoBehaviour
         }
 		else
 		{
-			print("Else");
 			float time = Time.time - lastGenerationTime;
 			if (generationLifeTime > 0) {
 				topCenterText.text = "Ends in: " + (generationLifeTime - time).ToString("F1");
@@ -188,12 +186,10 @@ public class CropsMinionController : MonoBehaviour
 		float waitTime = actualEvolTime / minions.Count;
 		float aux = Mathf.Clamp(time - evolutionStartAndEndDelay, -evolutionStartAndEndDelay, actualEvolTime) / actualEvolTime * (minions.Count - 1);
 		int index = Mathf.FloorToInt(aux);
-		print("Hello");
 		while (minionEvolveIndex <= index)
 		{
 			minions[minionEvolveIndex].Reset(ga.Population[minionEvolveIndex].Genes, minionMovementSpeed, minionActionSpeed, minionRotationSpeed, waitTime);
 			minionEvolveIndex++;
-			print("Evolve");
 		}
 
 		if (time >= totalEvolutionTime)

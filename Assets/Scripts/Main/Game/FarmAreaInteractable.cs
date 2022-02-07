@@ -6,9 +6,16 @@ using UnityEngine;
 public class FarmAreaInteractable : MonoBehaviour, IMixedRealityPointerHandler
 {
     private bool isSelected = false;
+    public Color originalColor;
     public bool IsSelected()
     {
         return isSelected;
+    }
+
+    void Start()
+    {
+        originalColor = transform.Find("Ground").GetComponent<SpriteRenderer>().color;
+        print(originalColor);
     }
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
@@ -16,7 +23,15 @@ public class FarmAreaInteractable : MonoBehaviour, IMixedRealityPointerHandler
         print("Clicked");
 
         var groundObject = transform.Find("Ground");
-        groundObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        if (isSelected)
+        {
+            groundObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        else
+        {
+            groundObject.GetComponent<SpriteRenderer>().color = originalColor;
+        }
+        
 
         print(isSelected);
     }

@@ -11,6 +11,7 @@ public class FarmArea : MonoBehaviour
 		if (!Application.isPlaying) {
 			FarmSpots = GetComponentsInChildren<FarmSpot>();
 		}
+		
 	}
 #endif
 }
