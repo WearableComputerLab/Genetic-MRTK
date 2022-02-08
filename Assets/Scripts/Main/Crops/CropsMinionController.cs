@@ -29,11 +29,10 @@ public class CropsMinionController : MonoBehaviour
 	[SerializeField] Transform farm;
 	[SerializeField] FarmArea[] farmAreas;
 
-	[Header("UI")]
-	[SerializeField] Text topCenterText;
-	[SerializeField] Text numMinionsText;
-	[SerializeField] Text maxMinionsText;
-	//[SerializeField] Text minionLimitText;
+	//[Header("UI")]
+	//[SerializeField] Text topCenterText;
+	//[SerializeField] Text numMinionsText;
+	//[SerializeField] Text maxMinionsText;
 
 	public Action<int> AddResource;
 	public Func<bool> CanBuyMinion;
@@ -72,8 +71,6 @@ public class CropsMinionController : MonoBehaviour
 		}
 #endif
 		minions = new List<Minion>(MaxNumMinions);
-		maxMinionsText.text = MaxNumMinions + " max";
-		topCenterText.text = "";
 
 		int numMinions = Mathf.Min(startingNumMinions, MaxNumMinions);
 		AddMinions(numMinions);
@@ -85,13 +82,6 @@ public class CropsMinionController : MonoBehaviour
 		minionEvolveIndex = 0;
 
 		NumMinionsToAdd = 0;
-
-		//limitTextAnimation = minionLimitText.DOFade(0, 0.3f)
-		//	.From()
-		//	.OnComplete(() => delaySequence.Restart())
-		//	.SetEase(Ease.Linear)
-		//	.SetAutoKill(false)
-		//	.Pause();
 
 		delaySequence = DOTween.Sequence()
 			.AppendInterval(3)
@@ -146,11 +136,6 @@ public class CropsMinionController : MonoBehaviour
 		else
 		{
 			float time = Time.time - lastGenerationTime;
-			if (generationLifeTime > 0) {
-				topCenterText.text = "Ends in: " + (generationLifeTime - time).ToString("F1");
-			} else if (!string.IsNullOrEmpty(topCenterText.text)) {
-				topCenterText.text = "";
-			}
 
 			if (generationLifeTime > 0 && time >= generationLifeTime || DidAllMinionsFinish())
 			{
@@ -184,7 +169,6 @@ public class CropsMinionController : MonoBehaviour
 		}
 		float totalEvolutionTime = maxEvolutionTime;
 		float time = Time.time - evolutionStartTime;
-		topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");
 
 		float actualEvolTime = totalEvolutionTime - evolutionStartAndEndDelay * 2;
 		float waitTime = actualEvolTime / minions.Count;
@@ -200,7 +184,6 @@ public class CropsMinionController : MonoBehaviour
 		{
 			evolutionStartTime = -1;
 			lastGenerationTime = Time.time;
-			topCenterText.text = "";
 		}
 	}
 

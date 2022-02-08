@@ -47,7 +47,7 @@ public class DNA<T>
 
 	public float OverrideFitness()
     {
-		Fitness += 20;
+		Fitness += 50;
 		return Fitness;
     }
 
