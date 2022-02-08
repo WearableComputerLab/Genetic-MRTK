@@ -12,16 +12,20 @@ public class FarmAreaInteractable : MonoBehaviour, IMixedRealityPointerHandler
         return isSelected;
     }
 
+    public void Unselected()
+    {
+        isSelected = false;
+    }
+
+
     void Start()
     {
         originalColor = transform.Find("Ground").GetComponent<SpriteRenderer>().color;
         print(originalColor);
     }
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-        isSelected = !isSelected;
-        print("Clicked");
 
+    void Update()
+    {
         var groundObject = transform.Find("Ground");
         if (isSelected)
         {
@@ -31,9 +35,13 @@ public class FarmAreaInteractable : MonoBehaviour, IMixedRealityPointerHandler
         {
             groundObject.GetComponent<SpriteRenderer>().color = originalColor;
         }
-        
 
-        print(isSelected);
+    }
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    {
+        isSelected = !isSelected;
+        print("Clicked");
+
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)

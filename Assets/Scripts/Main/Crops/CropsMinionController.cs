@@ -178,6 +178,10 @@ public class CropsMinionController : MonoBehaviour
 
     public void Evolve()
     {
+		for (int i = 0; i < farmAreas.Length; i++)
+        {
+			farmAreas[i].GetComponent<FarmAreaInteractable>().Unselected();
+		}
 		float totalEvolutionTime = maxEvolutionTime;
 		float time = Time.time - evolutionStartTime;
 		topCenterText.text = "Evolving: " + (totalEvolutionTime - time).ToString("F1");

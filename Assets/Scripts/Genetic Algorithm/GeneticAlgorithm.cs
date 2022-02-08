@@ -109,11 +109,13 @@ public class GeneticAlgorithm<T>
 			FarmArea farmArea = farm.GetComponentsInChildren<FarmArea>()[i];
 			
 			Population[i].CalculateFitness(i);
+			Debug.Log(Population[i].Fitness);
 			if (farmArea.GetComponent<FarmAreaInteractable>().IsSelected())
             {
 				Population[i].OverrideFitness();
 				Debug.Log("Add 20 to Fitness");
-            }
+				Debug.Log(Population[i].Fitness);
+			}
 			if (Population[i].Fitness > Population[indexOfBest].Fitness) {
 				indexOfBest = i;
 			}
